@@ -1,0 +1,57 @@
+.wrapper .content3 .main-box .main-right .main-right-top {
+    margin:30px auto;
+    margin-left: 30px;
+    /* margin-bottom: 10px; */
+    /* background-color: brown; */
+}
+
+.wrapper .content3 .main-box .main-right .main-right-top input{
+    margin-right: 75px;
+    /* margin-bottom: 10px; */
+    /* background-color: brown; */
+}
+
+
+.wrapper .content3 .main-box .main-right .main-right-bottom {
+    
+    margin:0 auto;
+    margin-top: 10px;
+    /* background-color: coral; */
+}
+
+.wrapper .content3 .main-box .main-right .main-right-bottom .show{
+    display: inline-block;
+    /* float: left; */
+    margin:0 auto;
+    margin-left: 20px;
+    width: 580px;
+    /* background-color: darkgrey; */
+}
+
+.wrapper .content3 .main-box .main-right .main-right-bottom .show input{
+    margin-top: 20px;
+    margin-left: 15px;
+    margin-right: 40px;
+}
+
+.wrapper .content3 .main-box .main-right .main-right-bottom .show .show-left{
+    float: left;
+    width:300px;
+    height: 400px;
+     background-color: coral; 
+}
+
+.wrapper .content3 .main-box .main-right .main-right-bottom .show .show-right{
+    float: left;
+    width:300px;
+    height: 400px;
+     background-color: cadetblue; 
+}
+
+.wrapper .content3 .main-box .main-right .main-right-bottom .show .show-left::after{
+    clear:both;
+}
+
+.wrapper .content3 .main-box .main-right .main-right-bottom .show .show-right::after{
+    clear:both;
+}

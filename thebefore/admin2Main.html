@@ -1,0 +1,133 @@
+<html>
+    <head>
+        <meta charset="utf-8">  
+        <link rel="stylesheet" type="text/css" href="adminMain.css">
+        <title>迎新系统</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="content1">
+                    <div>
+                            <span></span>
+                        </div>
+                        <!-- <div>武汉理工大学</div> -->
+                        <!-- <div>|</div> -->
+                        <div>迎新系统（管理员界面）</div>
+    
+
+                    <div class="top2">
+                        <div>
+                            <img src="source/pic/头像.jpg" alt="">
+                        </div>
+                        <div class="username">
+                            
+                        </div>
+                        <div>
+                            <button class="cancle">注销</button>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="content2">
+
+            </div>
+            <div class="content3">
+                <div class="main-box">
+                    <div class="main-left">
+                        <ul>
+                            <li><a href="http://localhost/whutNSS/thebefore/newStudentCheck1.html">新生报到注册</a></li>
+                            <li><a href="http://localhost/whutNSS/thebefore/upload1.html">基本信息查询</a></li>
+                            <li><a href="http://localhost/whutNSS/thebefore/dor1.html">宿舍信息查询</a></li>
+                            <li><a href="http://localhost/whutNSS/thebefore/class1.html">班级信息查询</a></li>
+                            <li><a href="http://localhost/whutNSS/thebefore/account1.html">缴费信息查询</a></li>
+                            <li><a href="http://localhost/whutNSS/thebefore/academic1.html">统计报到信息</a></li>
+                            <!-- <li><a href="http://localhost/whutNSS/thebefore/newStudentCheck.html">新生报到注册</a></li> -->
+                            <!-- <li><a href="http://localhost/whutNSS/thebefore/academic.html">统计报到信息</a></li> -->
+                        </ul>
+
+                    </div>
+                    <div class="main-right">
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <script type="text/javascript" src="cancel.js"></script>
+        <script type="text/javascript">
+            function getCookie(c_name){
+                if (document.cookie.length>0){
+                    c_start=document.cookie.indexOf(c_name + "=")
+                    if (c_start!=-1){ 
+                        c_start=c_start + c_name.length+1 
+                        c_end=document.cookie.indexOf(";",c_start)
+                        if (c_end==-1) c_end=document.cookie.length
+                        return unescape(document.cookie.substring(c_start,c_end))
+                    } 
+                }
+                return "";
+            }
+
+            function GetJson() { 
+                var xmlHttp; 
+                try { 
+                    // Firefox, Opera 8.0+, Safari 
+                    xmlHttp = new XMLHttpRequest(); 
+                } 
+                catch (e) { 
+                    // Internet Explorer 
+                    try { 
+                        xmlHttp = new ActiveXObject("Msxml2.XMLHTTP"); 
+                    } 
+                    catch (e) { 
+
+                        try { 
+                            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP"); 
+                        } 
+                        catch (e) { 
+                            alert("您的浏览器不支持AJAX！"); 
+                        return false; 
+                        } 
+                    } 
+                } 
+
+                xmlHttp.onreadystatechange = function() {
+                    if (xmlHttp.readyState == 4) { 
+                        //alert(xmlHttp.responseText); 
+                        var str = xmlHttp.responseText; 
+                        //document.getElementById('tb1').innerHTML +=str; 
+                        //alert(str); 
+                        console.log(str);
+                        var obj = eval('('+ str +')'); 
+                        var arr = Object.keys(obj);
+                        var len = arr.length;
+                        console.log(len);//结果为2
+                        // var obj1 = JSON.parse(obj);
+                        
+                        rows=len;
+
+                        console.log(arr);
+                        console.log(obj);
+                        console.log(obj[0].Sno);
+
+                        
+                        document.getElementsByClassName('username')[0].innerText=obj[0].Sdepartment;
+                    }
+                } 
+                xmlHttp.open("POST", "http://localhost/whutNSS/theafter/getstudentnews1.php", true); 
+                xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); 
+                xmlHttp.send(null); 
+            }
+            GetJson();
+
+            var per = getCookie('per');
+            console.log(per);
+            
+        </script>
+        
+
+    </body>
+	
+</html>

@@ -1,0 +1,25 @@
+.tb{
+    /* display:inline-block; */
+    width: 560px;
+    height: 210px;
+    /* background-color:#f4f4f4; */
+    margin:0 auto;
+    /* border:1px solid linear-gradient(to right,#e6e4e2 0,#6b6864 100%); */
+}
+
+
+
+.tb form{
+    /* background-color: #645a5a; */
+    background:linear-gradient(to top,#aed4d2 50%,#f8fafa 50%);
+    width: 560px;
+    height: 210px;
+    margin:0 auto;
+    padding-left: 20px;
+}
+
+.tb form input{
+    margin-top: 10px;
+    margin-left: 40px;
+    margin-right: 20px;
+}

@@ -1,0 +1,173 @@
+<html>
+    <head>
+        <meta charset="utf-8">  
+        <link rel="stylesheet" type="text/css" href="adminMain.css">
+        <link rel="stylesheet" type="text/css" href="upload.css">
+        <link rel="stylesheet" type="text/css" href="class.css">
+        <title>迎新系统</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="content1">
+                    <div>
+                            <span></span>
+                        </div>
+                        <!-- <div>武汉理工大学</div> -->
+                        <!-- <div>|</div> -->
+                        <div>迎新系统（管理员界面）</div>
+    
+
+                    <div class="top2">
+                        <div>
+                            <img src="source/pic/头像.jpg" alt="">
+                        </div>
+                        <div class="username">
+                            系统管理员
+                        </div>
+                        <div>
+                            <button class="cancle">注销</button>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="content2">
+
+            </div>
+            <div class="content3">
+                <div class="main-box">
+                    <div class="main-left">
+                            <ul>
+                                <li><a href="http://localhost/whutNSS/thebefore/upload.html?yeshu=0">新生基本信息管理</a></li>
+                                <li><a href="http://localhost/whutNSS/thebefore/class.html">班级分配管理</a></li>
+                                <li><a href="http://localhost/whutNSS/thebefore/checkclass.html">专业分配情况查询</a></li>
+                                <li><a href="http://localhost/whutNSS/thebefore/manage.html">系统管理</a></li>
+                            </ul>
+
+                    </div>
+                    <div class="main-right">
+                        <div class="main-right-top">
+                            <form class="main">
+                                <h4>班级分配</h4>
+                                请选择院系：
+                                <select name="province" onChange="set_city(this, this.form.city)">
+                                    <option value="0">选择学院</option>
+                                    <option value="计算机科学与技术学院">计算机科学与技术学院</option>
+                                    <option value="航运学院">航运学院</option>
+                                    <!-- <option value="信息学院">信息学院</option> -->
+                                    </select>
+                                请选择专业：
+                                <select name="city" id="citys">
+                                    <option value="0">选择专业</option>
+                                </select>
+                                班级人数：<input type="text" value="" name="num" class="peoplenum">
+                                <span onclick="GetJson()" class="fenpei" style="display: inline-block; cursor:pointer;border: 1px solid #acafaf;background-color: #e5e5e5;line-height: 100%;text-align: center;height: 19px;width: 50px;">分配</span>
+                            </form>
+                            
+                        </div>
+                        <div class="tb">
+                            
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <script type="text/javascript" src="cancel.js"></script>
+        <script type="text/javascript">
+            
+            cities = new Object();
+            cities['计算机科学与技术学院']=new Array('计算机科学与技术', '物联网', '软件工程');
+            cities['航运学院']=new Array('航海技术', '海事管理');
+            
+            function set_city(province, city)
+            {
+                var pv, cv;
+                var i, ii;
+            
+                pv=province.value;
+                cv=city.value;
+            
+                city.length=1;
+            
+                if(pv=='0') return;
+                if(typeof(cities[pv])=='undefined') return;
+            
+                for(i=0; i<cities[pv].length; i++)
+                {
+                ii = i+1;
+                city.options[ii] = new Option();
+                city.options[ii].text = cities[pv][i];
+                city.options[ii].value = cities[pv][i];
+                }            
+            }
+            function GetJson() { 
+                var xmlHttp = new XMLHttpRequest(); 
+                var  myselect=document.getElementById("citys");
+                var index=myselect.selectedIndex;
+                var Smajor = myselect.options[index].value;
+                var num = document.getElementsByClassName('peoplenum')[0].value;
+//                alert(str);
+//                alert(num);
+                var url = "http://localhost/whutNSS/theafter/class.php";
+                xmlHttp.open('POST',url,false);
+                xmlHttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+                xmlHttp.send("Smajor="+Smajor+"&"+"num="+num);
+
+                    if (xmlHttp.readyState == 4) { 
+                        var str = xmlHttp.responseText;
+                        console.log(str);
+//                        str;
+                        var obj = eval('('+ str +')');
+                        var arr = Object.keys(obj);
+                        var len = arr.length;
+                        console.log(len);//结果为2
+                        // var obj1 = JSON.parse(obj);
+                        
+                        rows=len;
+                        cols=8;
+
+                        console.log(arr);
+                        console.log(obj);
+                        console.log(obj[0].Sno);
+                        if(obj==1){
+                            alert("该专业已经进行过分配");
+                        }else{
+                             var tab='<table class="tb1">'
+                            tab+='<thead>'
+                                tab+='<tr>'
+                                    tab+="<th>"+'学院'+"</th>"
+                                    tab+="<th>"+'专业'+"</th>"
+                                    tab+="<th>"+'班级'+"</th>"
+                                    tab+="<th>"+'学号'+"</th>"
+                                    tab+="<th>"+'姓名'+"</th>"
+                                    tab+="<th>"+'性别'+"</th>"
+                                tab+="</tr>"
+                            tab+="</thead>"
+                            for(var i=0;i<rows;i++){
+                                tab+='<tr>'
+                                    tab+="<td>"+obj[i].Sdepartment+"</td>"
+                                    tab+="<td>"+obj[i].Smajor+"</td>"
+                                    tab+="<td>"+obj[i].Sclass+"</td>"
+                                    tab+="<td>"+obj[i].Sno+"</td>"
+                                    tab+="<td>"+obj[i].Sname+"</td>"
+                                    tab+="<td>"+obj[i].Ssex+"</td>"
+                                tab+='</tr>'                           
+                            }
+                            tab+='</table>'
+                            document.getElementsByClassName('tb')[0].innerHTML=tab;
+                        }
+
+                       
+                    }
+            
+            }
+            
+        </script>
+        
+
+    </body>
+	
+</html>

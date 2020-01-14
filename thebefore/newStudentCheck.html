@@ -1,0 +1,145 @@
+<html>
+    <head>
+        <meta charset="utf-8">  
+        <link rel="stylesheet" type="text/css" href="adminMain.css">
+        <link rel="stylesheet" href="newStudentCheck.css">
+        <title>迎新系统</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="content1">
+                    <div>
+                            <span></span>
+                        </div>
+                        <!-- <div>武汉理工大学</div> -->
+                        <!-- <div>|</div> -->
+                        <div>迎新系统（管理员界面）</div>
+    
+
+                    <div class="top2">
+                        <div>
+                            <img src="source/pic/头像.jpg" alt="">
+                        </div>
+                        <div>
+                            校级管理员
+                        </div>
+                        <div>
+                            <button class="cancle">注销</button>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="content2">
+
+            </div>
+            <div class="content3">
+                <div class="main-box">
+                    <div class="main-left">
+                        <ul>
+                            <li><a href="http://localhost/whutNSS/thebefore/upload.html?yeshu=0">新生基本信息管理</a> </li>
+                            <li><a href="http://localhost/whutNSS/thebefore/newStudentCheck.html">班级信息查询</a></li>
+                            <li><a href="http://localhost/whutNSS/thebefore/class.html">班级分配管理</a></li>
+                            <li><a href="http://localhost/whutNSS/thebefore/manage.html">系统管理</a></li>
+                        </ul>
+
+                    </div>
+                    <div class="main-right">
+                        <div class="main-right-top">
+                            <form action="#" method="POST">
+                                姓名：<input type="text" name="Sname" value="" class="Sname">
+                                考生号：<input type="text" name="Snu" value="" class="Snu">
+                                <!-- <input type="submit" value="查询" onclick="GetJson()"> -->
+                                <span onclick="GetJson()" class="fenpei" style="display: inline-block; cursor:pointer;background-color:rgb(228, 236, 233);width: 40px; text-align: center">查询</span>
+                            </form>
+                        </div>
+                        <hr>
+                        <div class="main-right-bottom">
+                            <form class="show" method="POST" action="http://localhost/whutNSS/theafter/newStudentReg.php">
+                                <!-- <div class="show-left"> -->
+                                    考生号：<input type="text" name="Snu" style="margin-left:0px">
+                                    姓名：<input type="text" name="Sname" style="margin-left:45px"><br>
+                                    性别：<input type="text" name="Ssex">
+                                    出生日期：<input type="text" name="Sbirth"><br>
+                                    籍贯：<input type="text" name="Saddress">
+                                    
+                                <!-- </div> -->
+                                <!-- <div class="show-right">    -->
+                                    身份证号：<input type="text" name="IDnumber" style="clear:both"><br>
+                                    民族：<input type="text" name="nation">
+                                    政治面貌：<input type="text" name="Spol"><br>
+                                    学院：<input type="text" name="Sdepartment">
+                                    专业：<input type="text" name="Smajor" style="margin-left:45px"><br>
+                                    <label style="display:none" class="yibaodao">已报到</label>
+                                    <input type="submit" value="报到" style="clear: both; display:none"> 
+                                <!-- </div> -->
+                                <!-- <input type="submit" value="报到" style="clear: both">  -->
+                            </form>
+                        </div>
+                        <hr>
+                        <div style="clear:both" class="tb">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="cancel.js"></script>
+        <script type="text/javascript">
+            function GetJson() { 
+                var xmlHttp = new XMLHttpRequest(); 
+                var  Sname=document.getElementsByClassName("Sname")[0].value;
+                var  Snu=document.getElementsByClassName("Snu")[0].value;
+
+                // alert(Snu);
+                // alert(Sname);
+                var url = "http://localhost/whutNSS/theafter/newStudentCheck.php";
+                xmlHttp.open('POST',url,false);
+                xmlHttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+                xmlHttp.send("Sname="+Sname+"&"+"Snu="+Snu);
+
+                if (xmlHttp.readyState == 4) { 
+                    var str = xmlHttp.responseText;
+                    console.log(str);
+                    var obj = eval('('+ str +')');
+                    var arr = Object.keys(obj);
+                    var len = arr.length;
+                    console.log(len);//结果为2
+                    // var obj1 = JSON.parse(obj);
+                    
+                    rows=len;
+                    cols=8;
+
+                    console.log(arr);
+                    console.log(obj);
+                    console.log(obj[0].Sno);
+
+                    var show = document.getElementsByClassName('show')[0].getElementsByTagName('input');
+                    console.log(show);
+                    if(obj[0].Sreg=='未报到'){
+                        show[10].style.display='inline-block';
+                    }else{
+                        var yibaodao = document.getElementsByClassName('yibaodao')[0];
+                        yibaodao.style.display='inline-block';
+                    }
+
+                    show[0].value=obj[0].Snu;
+                    show[1].value=obj[0].Sname;
+                    show[2].value=obj[0].Ssex;
+                    show[3].value=obj[0].Sbirth;
+                    show[4].value=obj[0].Saddress;
+                    show[5].value=obj[0].IDnumber;
+                    show[6].value=obj[0].nation;
+                    show[7].value=obj[0].Spol;
+                    show[8].value=obj[0].Sdepartment;
+                    show[9].value=obj[0].Smajor;
+                }
+                
+                
+            }
+
+            
+
+        </script>
+    </body>
+</html>

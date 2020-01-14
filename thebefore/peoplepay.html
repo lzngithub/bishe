@@ -1,0 +1,209 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+          <link rel="stylesheet" type="text/css" href="studentMain.css">
+          <title>迎新系统</title>
+	</head>
+	<body>
+        <div id="con" class="tanchukuang" style="display:none;list-style: none;text-decoration: none;">
+            <form action="http://localhost/whutNSS/theafter/setpassword.php" class="set1" method="GET">
+                
+                <label style="margin-left:-5px">用户类型：</label> <input type="text" value="学生" readonly="readonly"  style="width:80px;"><br>
+                用户名：<input type="text" value="" readonly="readonly" style="width:100px;"> <br>
+                <span class="setpassword" style="cursor:pointer;background-color: #b7ccd3;margin-top: 10px;display: inline-block;">修改密码</span>
+                <input type="password" value="" name="password1" style="display:none" placeholder="请输入原密码"><br>
+                <input type="password" value="" name="password2" style="display:none" placeholder="请输入新密码"><br>
+                <input type="submit" value="确定修改" style="display:none;margin-bottom: 10px">
+                
+            </form>
+        </div>
+        <div class="wrapper">
+            <div class="content1">
+                    <div>
+                        <img src="source/pic/whut.png" alt="">
+                    </div>
+                    <!-- <div>武汉理工大学</div> -->
+                    <!-- <div>|</div> -->
+                    <div style="display: inline-block; color:white;font-size: 20px">迎新系统</div>
+
+                    <div class="top2">
+                        <div>
+                            <img id="tf" class="shownews" src="source/pic/头像.jpg" alt="">
+                        </div>
+                        <div class="username">
+                            
+                        </div>
+                        <div>
+                            <button class="cancle">注销</button>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="content2">
+
+            </div>
+            <div class="content3">
+                <div class="main-box">
+                    <div class="main-left">
+                        <ul>
+                            <li> <a style="color:rgb(66, 64, 64)" href="http://localhost/whutNSS/thebefore/peoplenews.html">个人基本信息</a> </li>
+                            <li> <a style="color:rgb(66, 64, 64)" href="http://localhost/whutNSS/thebefore/dor_aca.html">宿舍班级信息</a> </li>
+                            <li> <a style="color:rgb(66, 64, 64)" href="http://localhost/whutNSS/thebefore/peoplepay.html">缴费信息</a> </li>
+                        </ul>
+
+                    </div>
+                    <div class="main-right">
+                            <div class="newscenter">
+                                <h4>缴费类型</h4>
+                                <p> <label>注册费：</label> <input type="text" value="1024元"><label>学分费：</label> <input type="text" value="2400元" style="margin-left:15px"></p>
+                                <p> <label>住宿费：</label> <input type="text" value="1024元"><label>总计费用：</label> <input type="text" value="4448元"></p>
+                                <p><label class="yijiaofei">已缴费</label></p>
+                            </div>
+                            <div class="newscenter1">
+                                <h4>缴费类型</h4>
+                                <p> <label>注册费：</label> <input type="text" value="1024元"><label>学分费：</label> <input type="text" value="2400元" style="margin-left:15px"></p>
+                                <p> <label>住宿费：</label> <input type="text" value="1024元"><label>总计费用：</label> <input type="text" value="4448元"></p>
+                                <p><label class="weijiaofei">未缴费</label></p>
+                                <h4>缴费方式</h4>
+                                <p><label>支付宝缴费</label> <label style="margin-left:120px">微信缴费</label> </p>
+                                <img src="source/pic/支付宝.jpg" alt="" style="width:200px;height:275px">
+                                <img src="source/pic/微信.png" alt="" style="width:200px;height:275px">
+                                <h3>缴费一般一天以内成功，不成功电话财务（13125175275）处理</h3>
+                            </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <script type="text/javascript">
+            function getCookie(c_name){
+                if (document.cookie.length>0){ 
+                    c_start=document.cookie.indexOf(c_name + "=")
+                    if (c_start!=-1){ 
+                        c_start=c_start + c_name.length+1 
+                        c_end=document.cookie.indexOf(";",c_start)
+                        if (c_end==-1) c_end=document.cookie.length
+                        return unescape(document.cookie.substring(c_start,c_end))
+                    } 
+                }
+                return "";
+            }
+
+            function delCookie(key) {
+                var date = new Date();
+                date.setTime(date.getTime() - 1);
+                var delValue = getCookie(key);
+                if (!!delValue) {
+                    document.cookie = key+'='+delValue+';expires='+date.toGMTString();
+                }
+            }
+
+                var xmlHttp=new XMLHttpRequest();
+                // var p;
+                
+
+                xmlHttp.onreadystatechange = function() {
+                    if (xmlHttp.readyState == 4) { 
+                        //alert(xmlHttp.responseText); 
+                        var str = xmlHttp.responseText; 
+                        //document.getElementById('tb1').innerHTML +=str; 
+                        //alert(str); 
+                        console.log(str);
+                        var obj = eval('('+ str +')'); 
+                        var arr = Object.keys(obj);
+                        var len = arr.length;
+                        console.log(len);//结果为2
+                        // var obj1 = JSON.parse(obj);
+                        
+                        rows=len;
+
+                        console.log(arr);
+                        console.log(obj);
+                        console.log(obj[0].Sno);
+
+                        
+                        document.getElementsByClassName('username')[0].innerText=obj[0].Sname;
+                        console.log(obj[0].pay);
+                        if(obj[0].pay=='已缴费'){
+                            document.getElementsByClassName('newscenter')[0].style.display='inline';
+                            document.getElementsByClassName('newscenter1')[0].style.display='none';
+
+                        }else{
+                            document.getElementsByClassName('newscenter1')[0].style.display='inline';
+                            document.getElementsByClassName('newscenter')[0].style.display='none';
+
+                        }
+                        // p=obj[0].pay;
+                        // return p;
+
+
+                    }
+                } 
+                xmlHttp.open("POST", "http://localhost/whutNSS/theafter/getstudentnews.php", true); 
+                xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); 
+                xmlHttp.send(null);
+                // var q = xmlHttp.onreadystatechange;
+                // console.log(q);
+            
+            
+            delCookie('user');
+            var y_email=getCookie('user');
+            var email=getCookie('password');
+            console.log(document.cookie);
+            console.log(y_email);
+            console.log(email);
+            
+            var cancle = document.getElementsByClassName('cancle')[0];
+            cancle.onclick = function(){
+                alert("注销成功");
+
+                // window.open('http://localhost/whutNSS/thebefore/index.html');
+                window.location.href="http://localhost/whutNSS/thebefore/index.html";
+            }
+
+            var shownews = document.getElementsByClassName('shownews')[0];
+            var tanchukuang = document.getElementsByClassName('tanchukuang')[0];
+            var setpassword = document.getElementsByClassName('setpassword')[0];
+            var input = document.getElementsByClassName('set1')[0].getElementsByTagName('input');
+            input[1].value = y_email;
+
+            function e(obj){return document.getElementById(obj)}
+            e('tf').onclick=function(event){
+                e('con').style.display='block';
+                stopBubble(event); 
+                document.onclick=function(){
+                e('con').style.display='none';
+                input[2].style.display='none';
+                input[3].style.display='none';
+                input[4].style.display='none';
+            　　　　　　　document.onclick=null;　
+                }
+            }
+
+            e('con').onclick=function(event){
+                //只阻止了向上冒泡，而没有阻止向下捕获，所以点击con的内部对象时，仍然可以执行这个函数
+                stopBubble(event); 
+            }
+            //阻止冒泡函数
+            function stopBubble(e){  
+                if(e && e.stopPropagation){
+                e.stopPropagation();  //w3c
+                }else{
+                window.event.cancelBubble=true; //IE
+                }
+            }
+            setpassword.onclick= function(){
+                input[2].style.display='inline';
+                input[3].style.display='inline';
+                input[4].style.display='inline';
+            }
+
+            
+        </script>
+            
+    </body>
+	
+</html>

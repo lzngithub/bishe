@@ -1,0 +1,153 @@
+<html>
+    <head>
+        <meta charset="utf-8">  
+        <link rel="stylesheet" type="text/css" href="adminMain.css">
+        <link rel="stylesheet" type="text/css" href="upload.css">
+        <title>迎新系统</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="content1">
+                    <div>
+                        <span></span>
+                    </div>
+                    <!-- <div>武汉理工大学</div> -->
+                    <!-- <div>|</div> -->
+                    <div>迎新系统（管理员界面）</div>
+
+                    <div class="top2">
+                        <div>
+                            <img src="source/pic/头像.jpg" alt="">
+                        </div>
+                        <div>
+                            系统管理员
+                        </div>
+                        <div>
+                            <button class="cancle">注销</button>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="content2">
+
+            </div>
+            <div class="content3">
+                <div class="main-box">
+                    <div class="main-left">
+                        <ul>
+                            <li><a href="http://localhost/whutNSS/thebefore/upload.html?yeshu=0">新生基本信息管理</a></li>
+                            <li><a href="http://localhost/whutNSS/thebefore/class.html">班级分配管理</a></li>
+                            <li><a href="http://localhost/whutNSS/thebefore/checkclass.html">专业分配情况查询</a></li>
+                            <li><a href="http://localhost/whutNSS/thebefore/manage.html">系统管理</a></li>
+                        </ul>
+
+                    </div>
+                    <div class="main-right">
+                        <div class="tb"></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <script type="text/javascript" src="cancel.js"></script>
+        <script type="text/javascript">
+            function getCookie(c_name){
+                if (document.cookie.length>0){
+                    c_start=document.cookie.indexOf(c_name + "=")
+                    if (c_start!=-1){ 
+                        c_start=c_start + c_name.length+1 
+                        c_end=document.cookie.indexOf(";",c_start)
+                        if (c_end==-1) c_end=document.cookie.length
+                        return unescape(document.cookie.substring(c_start,c_end))
+                    } 
+                }
+                return "";
+            }
+
+            function GetJson() { 
+                var xmlHttp;  
+                try { 
+                    // Firefox, Opera 8.0+, Safari 
+                    xmlHttp = new XMLHttpRequest(); 
+                } 
+                catch (e) { 
+                    // Internet Explorer 
+                    try { 
+                        xmlHttp = new ActiveXObject("Msxml2.XMLHTTP"); 
+                    } 
+                    catch (e) { 
+
+                        try { 
+                            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP"); 
+                        } 
+                        catch (e) { 
+                            alert("您的浏览器不支持AJAX！"); 
+                        return false; 
+                        } 
+                    } 
+                } 
+
+                xmlHttp.onreadystatechange = function() { 
+                // xmlhttp.readyState的值及解释：
+                // 0：请求未初始化（还没有调用 open()）。
+                // 1：请求已经建立，但是还没有发送（还没有调用 send()）。
+                // 2：请求已发送，正在处理中（通常现在可以从响应中获取内容头）。
+                // 3：请求在处理中；通常响应中已有部分数据可用了，但是服务器还没有完成响应的生成。
+                // 4：响应已完成；您可以获取并使用服务器的响应了。
+                    if (xmlHttp.readyState == 4) { 
+                        //alert(xmlHttp.responseText); 
+                        var str = xmlHttp.responseText; 
+                        //document.getElementById('tb1').innerHTML +=str; 
+                        //alert(str); 
+                        console.log(str);
+                        var obj = eval('('+ str +')'); 
+                        var arr = Object.keys(obj);
+                        var len = arr.length;
+                        console.log(len);//结果为2
+                        // var obj1 = JSON.parse(obj);
+                        
+                        rows=len;
+                        cols=8;
+
+                        console.log(arr);
+                        console.log(obj);
+                        console.log(obj[0].Sno);
+
+                        var tab='<table class="tb1">'
+                            tab+='<thead>'
+                                tab+='<tr>'
+                                    tab+="<th>"+'专业代号'+"</th>"
+                                    tab+="<th>"+'学院'+"</th>"
+                                    tab+="<th>"+'专业'+"</th>"
+                                    tab+="<th>"+'分配情况'+"</th>"
+                                tab+="</tr>"
+                            tab+="</thead>"
+                            for(var i=0;i<rows;i++){
+                                tab+='<tr>'
+                                    tab+="<td>"+obj[i].SdepID+"</td>"
+                                    tab+="<td>"+obj[i].Sdepartment+"</td>"
+                                    tab+="<td>"+obj[i].Smajor+"</td>"
+                                    tab+="<td>"+obj[i].logic+"</td>"
+                                tab+='</tr>'                           
+                            }
+                        tab+='</table>'
+                        document.getElementsByClassName('tb')[0].innerHTML=tab;
+                    }
+                }
+                xmlHttp.open("POST", "http://localhost/whutNSS/theafter/getclass.php", true); 
+                xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); 
+                xmlHttp.send(null); 
+            }
+            GetJson();
+
+            var per = getCookie('per');
+            console.log(per);
+            
+        </script>
+
+    </body>
+	
+</html>

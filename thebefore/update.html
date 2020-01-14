@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <meta charset="utf-8">  
+        <link rel="stylesheet" type="text/css" href="adminMain.css">
+        <link rel="stylesheet" href="upload.css">
+        <link rel="stylesheet" type="text/css" href="add.css">
+        <title>迎新系统</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="content1">
+                    <div>
+                            <span></span>
+                        </div>
+                        <!-- <div>武汉理工大学</div> -->
+                        <!-- <div>|</div> -->
+                        <div>迎新系统（管理员界面）</div>
+
+                    <div class="top2">
+                        <div>
+                            <img src="source/pic/头像.jpg" alt="">
+                        </div>
+                        <div>
+                            校级管理员
+                        </div>
+                        <div>
+                            <button class="cancle">注销</button>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="content2">
+
+            </div>
+            <div class="content3">
+                <div class="main-box">
+                    <div class="main-left">
+                            <ul>
+                                <li><a href="http://localhost/whutNSS/thebefore/upload.html?yeshu=0">新生基本信息管理</a></li>
+                                <li><a href="http://localhost/whutNSS/thebefore/class.html">班级分配管理</a></li>
+                                <li><a href="http://localhost/whutNSS/thebefore/checkclass.html">专业分配情况查询</a></li>
+                                <li><a href="http://localhost/whutNSS/thebefore/manage.html">系统管理</a></li>
+                            </ul>
+
+                    </div>
+                    <div class="main-right">
+                        <div class="tb">
+                            <form action="http://localhost/whutNSS/theafter/update.php" method="GET" class="form1">
+                                考生号：<input type="text" name="Snu" value="" style="margin-left: 26px" readonly="readonly">
+                                姓名：<input type="text" name="Sname" value=""><br/>
+                                <label style="margin-left: 0px">出生日期：</label> <input type="text" name="Sbirth" value="" style="margin-left: 3px">
+                                籍贯：<input  type="text" name="Saddress" value=""><br/>
+                                民族：<input type="text" name="nation" value="">
+                                身份证号：<input type="text" name="IDnumber" value="" style="margin-left: 8px"><br/>
+                                政治面貌：<input type="text" name="Spol" value="" style="margin-left: 8px">
+                                学院：  <input type="text" name="Sdepartment" value="" style="margin-left: 35px"><br/>
+                                专业：  <input type="text" name="Smajor" value="" style="margin-left: 35px">
+                                性别：<input type="radio" name="Ssex" value="男" style="margin-right: 5px">男
+                                    <input type="radio" name="Ssex" value="女" style="margin-right: 0px">女<br/> 
+                                        <input type="submit" value="提交" style="margin-left: 0px;margin-top:20px">
+                            </form>
+      
+                        </div>
+                        <hr>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <script type="text/javascript" src="cancel.js"></script>
+        <script type="text/javascript">
+//            var loc = location.href;
+//            var n1 = loc.length;//地址的总长度
+//            var n2 = loc.indexOf("=");//取得=号的位置
+//            var id = decodeURI(loc.substr(n2+1, n1-n2));//从=号后面的内容
+//            alert(id);
+            
+
+            function getParam(){
+                var C1,C2;
+                var loc = location.href;
+                var n1 = loc.length;//地址的总长度
+                var n2 = loc.indexOf("?");//取得=号的位置
+                var reg1 = /&/;
+                var reg2 = /=/;
+                C1=decodeURI(loc.substr(n2+1, n1-n2));//从=号后面的内容
+                C2=C1.split(reg1);
+                console.log(C2);
+                for(var i=0;i<10;i++){
+                    C2[i]=C2[i].split(reg2)[1];
+                }
+                
+                console.log(C1);
+                return C2;
+            }
+            var student =getParam();
+            console.log(student);
+            var form = document.getElementsByClassName('form1')[0];
+            
+            var xinp=form.getElementsByTagName('input');//获取表单中所有输入框
+            for(var i=0;i<xinp.length-2;i++)//循环
+            {
+                if(i==xinp.length-3){
+                    if(student[i]=='男'){
+                        xinp[i].checked='true';
+                    }else{
+                        xinp[i+1].checked='true';
+                    }
+                }else{
+                    xinp[i].value=student[i];//将每个输入框中的值付给数组对应项
+                }               
+            }
+   
+            console.log(student);
+
+            
+
+        </script>
+
+        
+
+    </body>
+	
+</html>

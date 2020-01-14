@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>点击其它地方关闭DIV</title>
+</head>
+<body>
+  <div class="fenye">
+    <!-- <a href="">niha</a> -->
+  </div>
+
+  <script type="text/javascript">
+    var a=new Array();
+    var fenye=document.getElementsByClassName('fenye')[0];
+    fenye.style.width='100px';
+    fenye.style.height='100px';
+    fenye.style.backgroundColor= 'red';
+    for(var i=0;i<5;i++){
+      a[i]=document.createElement('a');
+      fenye.appendChild(a[i]);
+      a[i].innerText=i;
+      console.log(a);
+    }
+    // fenye.firstChild=a;
+    
+    
+    
+  </script>
+</body>
+</html>

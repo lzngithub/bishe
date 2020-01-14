@@ -1,0 +1,54 @@
+.wrapper .content3 .main-box .main-right .main-right-top {
+    margin:30px auto;
+    margin-left: 30px;
+    /* background-color: brown; */
+}
+
+/* .wrapper .content3 .main-box .main-right .main-right-top .main .peoplenum{
+    width: 60px;
+} */
+
+.wrapper .content3 .main-box .main-right .main-right-top .main .fenpei{
+    margin-left: 10px;
+}
+
+.wrapper .content3 .main-box .main-right .tb {
+    margin:0 auto;
+    width: auto;
+    height: 700px;
+    /*background-color: coral;*/
+}
+
+.wrapper .content3 .main-box .main-right .tb .tb1{
+    border:1px solid black;
+    border-collapse: collapse;
+    margin:0 auto;
+    width:780px;
+    text-align: center;
+    font-size:13px;
+    
+}
+
+.wrapper .content3 .main-box .main-right .tb .tb1 th{
+    border:1px solid #cad9ea;
+    background-color: #cce8e8;
+}
+
+.wrapper .content3 .main-box .main-right .tb .tb1 td{
+    border:1px solid #cad9ea;
+    color: #666;
+
+}
+
+.wrapper .content3 .main-box .main-right .tb .tb1 tr:nth-child(odd){
+    background-color: #fff;
+
+}
+
+.wrapper .content3 .main-box .main-right .tb .tb1 tr:nth-child(even){
+    background-color: #f5fafa;
+
+}
+
+
+

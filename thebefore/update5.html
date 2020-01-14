@@ -1,0 +1,143 @@
+<html>
+    <head>
+        <meta charset="utf-8">  
+        <link rel="stylesheet" type="text/css" href="adminMain.css">
+        <link rel="stylesheet" href="upload.css">
+        <link rel="stylesheet" type="text/css" href="add.css">
+        <title>迎新系统</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="content1">
+                    <div>
+                            <span></span>
+                        </div>
+                        <!-- <div>武汉理工大学</div> -->
+                        <!-- <div>|</div> -->
+                        <div>迎新系统（管理员界面）</div>
+
+                    <div class="top2">
+                        <div>
+                            <img src="source/pic/头像.jpg" alt="">
+                        </div>
+                        <div class="username">
+                            
+                        </div>
+                        <div>
+                            <button class="cancle">注销</button>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="content2">
+
+            </div>
+            <div class="content3">
+                <div class="main-box">
+                    <div class="main-left">
+                            <ul>
+                                <li><a href="http://localhost/whutNSS/thebefore/newStudentCheck1.html">新生报到注册</a></li>
+                                <li><a href="http://localhost/whutNSS/thebefore/upload1.html">基本信息查询</a></li>
+                                <li><a href="http://localhost/whutNSS/thebefore/dor1.html">宿舍信息查询</a></li>
+                                <li><a href="http://localhost/whutNSS/thebefore/class1.html">班级信息查询</a></li>
+                                <li><a href="http://localhost/whutNSS/thebefore/account1.html">缴费信息查询</a></li>
+                                <li><a href="http://localhost/whutNSS/thebefore/academic1.html">统计报到信息</a></li>
+                                <!-- <li><a href="http://localhost/whutNSS/thebefore/newStudentCheck.html">新生报到注册</a></li> -->
+                                <!-- <li><a href="http://localhost/whutNSS/thebefore/academic.html">统计报到信息</a></li> -->
+                            </ul>
+
+                    </div>
+                    <div class="main-right">
+                        <div class="tb">
+                            <form action="http://localhost/whutNSS/theafter/update5.php" method="GET" class="form1">
+                                学院：  <input type="text" name="Sdepartment" value="" style="margin-left: 35px" readonly="readonly">
+                                专业：  <input type="text" name="Smajor" value="" style="margin-left: 35px" readonly="readonly"><br/>
+                                班级：<input type="text" name="Sclass" value="">
+                                学号：<input type="text" name="Sno" value="" style="margin-left: 40px" readonly="readonly"><br/>
+                                姓名：<input type="text" name="Sname" value="" readonly="readonly">
+                                性别：<input type="radio" name="Ssex" value="男" style="margin-right: 5px;" disabled>男
+                                    <input type="radio" name="Ssex" value="女" style="margin-right: 0px" disabled>女<br/> 
+                                        <input type="submit" value="提交" style="margin-left: 0px;margin-top:20px">
+                            </form>
+      
+                        </div>
+                        <hr>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <script type="text/javascript" src="cancel.js"></script>
+        <script type="text/javascript">
+//            var loc = location.href;
+//            var n1 = loc.length;//地址的总长度
+//            var n2 = loc.indexOf("=");//取得=号的位置
+//            var id = decodeURI(loc.substr(n2+1, n1-n2));//从=号后面的内容
+//            alert(id);
+            
+
+            function getParam(){
+                var C1,C2;
+                var loc = location.href;
+                var n1 = loc.length;//地址的总长度
+                var n2 = loc.indexOf("?");//取得=号的位置
+                var reg1 = /&/;
+                var reg2 = /=/;
+                C1=decodeURI(loc.substr(n2+1, n1-n2));//从=号后面的内容
+                C2=C1.split(reg1);
+                console.log(C2);
+                for(var i=0;i<6;i++){
+                    C2[i]=C2[i].split(reg2)[1];
+                }
+                
+                console.log(C1);
+                return C2;
+            }
+            var student =getParam();
+            console.log(student);
+            var form = document.getElementsByClassName('form1')[0];
+            
+            var xinp=form.getElementsByTagName('input');//获取表单中所有输入框
+            for(var i=0;i<xinp.length-2;i++)//循环
+            {
+                if(i==xinp.length-3){
+                    if(student[i]=='男'){
+                        xinp[i].checked='true';
+                    }else{
+                        xinp[i+1].checked='true';
+                    }
+                }else{
+                    xinp[i].value=student[i];//将每个输入框中的值付给数组对应项
+                }               
+            }
+   
+            console.log(student);
+            function GetJson1() { 
+                var xmlHttp1; 
+                xmlHttp1 = new XMLHttpRequest(); 
+                xmlHttp1.open("POST", "http://localhost/whutNSS/theafter/getstudentnews1.php", true); 
+                xmlHttp1.setRequestHeader("Content-Type","application/x-www-form-urlencoded"); 
+                xmlHttp1.send(null); 
+                xmlHttp1.onreadystatechange = function() {
+                    if (xmlHttp1.readyState == 4) { 
+                        var str = xmlHttp1.responseText; 
+                        var obj = eval('('+ str +')'); 
+                        console.log(obj);
+                        document.getElementsByClassName('username')[0].innerText=obj[0].Sdepartment;
+                    }
+                } 
+            }
+            GetJson1();
+
+            
+
+        </script>
+
+        
+
+    </body>
+	
+</html>

@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <meta charset="utf-8">  
+        <link rel="stylesheet" type="text/css" href="adminMain.css">
+        <link rel="stylesheet" href="upload.css">
+        <title>迎新系统</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="content1">
+                    <div>
+                            <span></span>
+                        </div>
+                        <!-- <div>武汉理工大学</div> -->
+                        <!-- <div>|</div> -->
+                        <div>迎新系统（管理员界面）</div>
+
+                    <div class="top2">
+                        <div>
+                            <img src="source/pic/头像.jpg" alt="">
+                        </div>
+                        <div>
+                            宿管员
+                        </div>
+                        <div>
+                            <button class="cancle">注销</button>
+                        </div>
+                    </div>
+
+
+            </div>
+            <div class="content2">
+
+            </div>
+            <div class="content3">
+                <div class="main-box">
+                    <div class="main-left">
+                            <li><a href="http://localhost/whutNSS/thebefore/dor3.html">宿舍管理</a></li>
+                        </ul>
+
+                    </div>
+                    <div class="main-right">
+                        <div class="tb">
+                            <form action="http://localhost/whutNSS/theafter/update4.php" method="GET" class="form1">
+                                宿舍区：<input type="text" name="campus" value="" ><br/>
+                                楼栋：<input type="text" name="building" value=""><br/>
+                                房间号：<input type="text" name="room" value=""><br/>
+                                学号1：<input type="text" name="id1" value="null"><br/>
+                                学号2：<input type="text" name="id2" value="null"><br/>
+                                学号3：<input type="text" name="id3" value="null"><br/>
+                                学号4：<input type="text" name="id4" value="null"><br/>
+                                性别：<input type="radio" name="sex" value="男">男
+                                    <input type="radio" name="sex" value="女">女<br/>  
+                                    <input type="submit" value="提交">
+                            </form>
+      
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <script type="text/javascript" src="cancel.js"></script>
+        <script type="text/javascript">
+            function getParam(){
+            var C1,C2;
+            var loc = location.href;
+            var n1 = loc.length;//地址的总长度
+            var n2 = loc.indexOf("?");//取得=号的位置
+            var reg1 = /&/;
+            var reg2 = /=/;
+            C1=decodeURI(loc.substr(n2+1, n1-n2));//从=号后面的内容
+            C2=C1.split(reg1);
+            console.log(C2);
+            for(var i=0;i<8;i++){
+                C2[i]=C2[i].split(reg2)[1];
+            }
+            
+            console.log(C1);
+            return C2;
+        }
+        var student =getParam();
+        console.log(student);
+        var form = document.getElementsByClassName('form1')[0];
+        
+        var xinp=form.getElementsByTagName('input');//获取表单中所有输入框
+        for(var i=0;i<xinp.length-2;i++)//循环
+        {
+            if(i==xinp.length-3){
+                if(student[i]=='男'){
+                    xinp[i].checked='true';
+                }else{
+                    xinp[i+1].checked='true';
+                }
+            }else{
+                xinp[i].value=student[i];//将每个输入框中的值付给数组对应项
+            }               
+        }
+        </script>
+        
+
+        
+
+    </body>
+	
+</html>
